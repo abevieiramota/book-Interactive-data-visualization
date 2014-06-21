@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head><style type="text/css">.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+.axis text {
+  font-family: sans-serif;
+  font-size: 11px;
+}</style>
+
+
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<title>D3</title>
+</head>
+<body>
+<!-- Start your code here -->
+
+<!-- End your code here -->
+
+<script>var w = 400;
+var h = 400;
+var padding = 30;
+var dataset = [
+  [0,0],
+  [1,100],
+  [2,200],
+  [3,300],
+  [4,400],
+  [5,500],
+  [3,255]
+];
+
+var xScale = d3
+.scale.linear()
+.domain([0, d3.max(dataset, function(d){
+  return d[0];
+})])
+.range([padding, w-padding]);
+
+var yScale = d3
+.scale.linear()
+.domain([0, d3.max(dataset, function(d){
+  return d[1];
+})])
+.range([h-padding, padding]);
+
+var rScale = d3
+.scale.linear()
+.domain([0, d3.max(dataset, function(d){
+  return d[1];
+})])
+.range([2, 15]);
+
+var svg = d3
+.select("body")
+.append("svg");
+
+var cs = svg
+.selectAll("circle")
+.data(dataset)
+.enter()
+.append("circle")
+.attr({
+  cx: function(d){
+    return xScale(d[0]);
+  },
+  cy: function(d){
+    return yScale(d[1]);
+  },
+  r: function(d) {
+    return rScale(d[1]);
+  }
+});
+
+var xAxis = d3.svg
+.axis()
+.scale(xScale)
+.orient("bottom")
+.ticks(5);
+
+svg
+.append("g")
+.attr("class", "axis")
+.attr("transform", "translate(0,"+(h-padding)+")")
+.call(xAxis);
+var yAxis = d3.svg
+.axis()
+.scale(yScale)
+.orient("left")
+.ticks(5);
+
+svg
+.append("g")
+.attr("class", "axis")
+.attr("transform", "translate("+padding+",0)")
+.call(yAxis);</script><svg><circle cx="30" cy="370" r="2"></circle><circle cx="98" cy="302" r="4.6"></circle><circle cx="166" cy="234" r="7.2"></circle><circle cx="234.00000000000003" cy="166" r="9.8"></circle><circle cx="302" cy="98" r="12.4"></circle><circle cx="370" cy="30" r="15"></circle><circle cx="234.00000000000003" cy="196.6" r="8.629999999999999"></circle><g class="axis" transform="translate(0,370)"><g class="tick" transform="translate(30,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">0</text></g><g class="tick" transform="translate(98,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">1</text></g><g class="tick" transform="translate(166,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">2</text></g><g class="tick" transform="translate(234.00000000000003,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">3</text></g><g class="tick" transform="translate(302,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">4</text></g><g class="tick" transform="translate(370,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">5</text></g><path class="domain" d="M30,6V0H370V6"></path></g><g class="axis" transform="translate(30,0)"><g class="tick" transform="translate(0,370)" style="opacity: 1;"><line x2="-6" y2="0"></line><text x="-9" y="0" dy=".32em" style="text-anchor: end;">0</text></g><g class="tick" transform="translate(0,302)" style="opacity: 1;"><line x2="-6" y2="0"></line><text x="-9" y="0" dy=".32em" style="text-anchor: end;">100</text></g><g class="tick" transform="translate(0,234)" style="opacity: 1;"><line x2="-6" y2="0"></line><text x="-9" y="0" dy=".32em" style="text-anchor: end;">200</text></g><g class="tick" transform="translate(0,166)" style="opacity: 1;"><line x2="-6" y2="0"></line><text x="-9" y="0" dy=".32em" style="text-anchor: end;">300</text></g><g class="tick" transform="translate(0,98)" style="opacity: 1;"><line x2="-6" y2="0"></line><text x="-9" y="0" dy=".32em" style="text-anchor: end;">400</text></g><g class="tick" transform="translate(0,30)" style="opacity: 1;"><line x2="-6" y2="0"></line><text x="-9" y="0" dy=".32em" style="text-anchor: end;">500</text></g><path class="domain" d="M-6,30H0V370H-6"></path></g></svg></body>
