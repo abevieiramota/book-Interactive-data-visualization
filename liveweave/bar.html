@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head><style type="text/css">.axis {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}</style>
+
+
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<title>HTML5, CSS3 and JavaScript demo</title>
+</head>
+<body>
+<p>Clica aqui amigão</p>
+
+<script>var w = 500;
+var h = 500;
+var xPadding = 20;
+var yPadding = 20;
+var barPadding = 2;
+var n = 30;
+var dataset = [];
+
+var atualizaDados = function() {
+  
+  dataset = [];
+  
+  for(var i=0;i<n;i++) {
+    dataset.push(Math.round(Math.random()*100));
+  }
+  console.log(dataset);
+};
+
+atualizaDados();
+
+var yScale = d3.scale
+.linear()
+.domain([0, d3.max(dataset)])
+.range([h-yPadding, yPadding]);
+
+var xScale = d3.scale
+.ordinal()
+.domain(d3.range(dataset.length))
+.rangeRoundBands([0,w], 0.05);
+
+var svg = d3
+.select("body")
+.append("svg");
+
+var bars = svg
+.selectAll("rect")
+.data(dataset)
+.enter()
+.append("rect")
+.attr({
+  x: function(d, i) {
+    return xScale(i);
+  },
+  y: function(d) {
+    return h - yScale(d);
+  },
+  width: xScale.rangeBand(),
+  height: function(d) {
+    return yScale(d);
+  },
+  fill: function(d) {
+    return "rgb(30,"+d*10+",120)";
+  }
+});
+
+var xAxis = d3.svg
+.axis()
+.scale(xScale)
+.orient("bottom");
+
+svg
+.append("g")
+.attr("class", "axis")
+.attr("transform", "translate(0,"+h+")")
+.call(xAxis);
+
+d3.select("p")
+.on("click", function() {
+  atualizaDados();
+  
+  svg.selectAll("rect")
+  .data(dataset)
+  .transition()
+  .duration([2000, 1000, 2500][Math.round(Math.random()*2)])
+  .ease(["bounce", "linear", "elastic"][Math.round(Math.random()*2)])
+  .attr({
+    y: function(d) {
+      return h - yScale(d);
+    },
+    height: function(d) {
+      return yScale(d);
+    },
+    fill: function(d) {
+      return "rgb(30,"+d*10+",120)";
+  }
+  });
+});</script><svg><rect x="10" y="444.61538461538464" width="15" height="55.38461538461536" fill="#1eff78"></rect><rect x="26" y="368.7912087912088" width="15" height="131.20879120879118" fill="#1eff78"></rect><rect x="42" y="20" width="15" height="480" fill="#1e0078"></rect><rect x="58" y="318.24175824175825" width="15" height="181.75824175824175" fill="#1eff78"></rect><rect x="74" y="449.67032967032975" width="15" height="50.32967032967025" fill="#1eff78"></rect><rect x="90" y="353.62637362637366" width="15" height="146.37362637362634" fill="#1eff78"></rect><rect x="106" y="434.50549450549454" width="15" height="65.49450549450546" fill="#1eff78"></rect><rect x="122" y="55.38461538461536" width="15" height="444.61538461538464" fill="#1e4678"></rect><rect x="138" y="191.86813186813185" width="15" height="308.13186813186815" fill="#1eff78"></rect><rect x="154" y="75.60439560439562" width="15" height="424.3956043956044" fill="#1e6e78"></rect><rect x="170" y="343.51648351648356" width="15" height="156.48351648351644" fill="#1eff78"></rect><rect x="186" y="399.1208791208792" width="15" height="100.87912087912082" fill="#1eff78"></rect><rect x="202" y="232.30769230769232" width="15" height="267.6923076923077" fill="#1eff78"></rect><rect x="218" y="151.42857142857144" width="15" height="348.57142857142856" fill="#1eff78"></rect><rect x="234" y="136.2637362637363" width="15" height="363.7362637362637" fill="#1ee678"></rect><rect x="250" y="136.2637362637363" width="15" height="363.7362637362637" fill="#1ee678"></rect><rect x="266" y="227.25274725274727" width="15" height="272.74725274725273" fill="#1eff78"></rect><rect x="282" y="373.84615384615387" width="15" height="126.15384615384613" fill="#1eff78"></rect><rect x="298" y="389.010989010989" width="15" height="110.98901098901098" fill="#1eff78"></rect><rect x="314" y="515.3846153846155" width="15" height="-15.384615384615472" fill="#1eff78"></rect><rect x="330" y="212.08791208791206" width="15" height="287.91208791208794" fill="#1eff78"></rect><rect x="346" y="272.7472527472528" width="15" height="227.25274725274724" fill="#1eff78"></rect><rect x="362" y="181.75824175824175" width="15" height="318.24175824175825" fill="#1eff78"></rect><rect x="378" y="40.219780219780205" width="15" height="459.7802197802198" fill="#1e2878"></rect><rect x="394" y="232.30769230769232" width="15" height="267.6923076923077" fill="#1eff78"></rect><rect x="410" y="222.19780219780222" width="15" height="277.8021978021978" fill="#1eff78"></rect><rect x="426" y="25.05494505494505" width="15" height="474.94505494505495" fill="#1e0a78"></rect><rect x="442" y="399.1208791208792" width="15" height="100.87912087912082" fill="#1eff78"></rect><rect x="458" y="121.09890109890114" width="15" height="378.90109890109886" fill="#1ec878"></rect><rect x="474" y="222.19780219780222" width="15" height="277.8021978021978" fill="#1eff78"></rect><g class="axis" transform="translate(0,500)"><g class="tick" transform="translate(17.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">0</text></g><g class="tick" transform="translate(33.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">1</text></g><g class="tick" transform="translate(49.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">2</text></g><g class="tick" transform="translate(65.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">3</text></g><g class="tick" transform="translate(81.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">4</text></g><g class="tick" transform="translate(97.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">5</text></g><g class="tick" transform="translate(113.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">6</text></g><g class="tick" transform="translate(129.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">7</text></g><g class="tick" transform="translate(145.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">8</text></g><g class="tick" transform="translate(161.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">9</text></g><g class="tick" transform="translate(177.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">10</text></g><g class="tick" transform="translate(193.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">11</text></g><g class="tick" transform="translate(209.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">12</text></g><g class="tick" transform="translate(225.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">13</text></g><g class="tick" transform="translate(241.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">14</text></g><g class="tick" transform="translate(257.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">15</text></g><g class="tick" transform="translate(273.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">16</text></g><g class="tick" transform="translate(289.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">17</text></g><g class="tick" transform="translate(305.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">18</text></g><g class="tick" transform="translate(321.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">19</text></g><g class="tick" transform="translate(337.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">20</text></g><g class="tick" transform="translate(353.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">21</text></g><g class="tick" transform="translate(369.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">22</text></g><g class="tick" transform="translate(385.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">23</text></g><g class="tick" transform="translate(401.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">24</text></g><g class="tick" transform="translate(417.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">25</text></g><g class="tick" transform="translate(433.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">26</text></g><g class="tick" transform="translate(449.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">27</text></g><g class="tick" transform="translate(465.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">28</text></g><g class="tick" transform="translate(481.5,0)" style="opacity: 1;"><line y2="6" x2="0"></line><text y="9" x="0" dy=".71em" style="text-anchor: middle;">29</text></g><path class="domain" d="M0,6V0H500V6"></path></g></svg></body>
