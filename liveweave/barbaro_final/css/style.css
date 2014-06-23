@@ -1,0 +1,9 @@
+.axis {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+p {
+  background-color: red;
+}
